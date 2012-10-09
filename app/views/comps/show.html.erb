@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Comp Id</b>
+  <%= @comp.id %>
+</p>
+
+<p>
+  <b>Status</b>
+  <%= @comp.status %>
+</p>
+<p>
+  <% @comp.games.each do |game| %>
+  
+	<%= game.id %>
+    <%= game.teamA.name %>  -- vs -- <%= game.teamB.name %> 
+    <%= link_to 'Show', game %>
+    <%= link_to 'Edit', edit_game_path(game) %>
+    <%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete %>
+  
+<% end %>
+</p>
+
+
+<%= link_to 'Edit', edit_comp_path(@comp) %> |
+<%= link_to 'Back', comps_path %>

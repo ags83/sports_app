@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  teamA_id: 1
+  teamB_id: 1
+  comp_id: 1
+  result: 1
+
+two:
+  teamA_id: 1
+  teamB_id: 1
+  comp_id: 1
+  result: 1

@@ -1,0 +1,26 @@
+<h1>Listing Comps</h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Status</th>
+    <th>Game count</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @comps.each do |comp| %>
+  <tr>
+    <td><%= comp.id %></td>
+    <td><%= comp.status %></td>
+	<td><%= comp.games.count %></td>
+    <td><%= link_to 'Show', comp %></td>
+    <td><%= link_to 'Edit', edit_comp_path(comp) %></td>
+    <td><%= link_to 'Destroy', comp, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Comp', new_comp_path %>

@@ -1,0 +1,23 @@
+<%= form_for(@comp) do |f| %>
+  <p>
+  Comp status:
+  <%= f.select( :comp, :status,   [['Open', 0], ['Closed', 1],['Complete', 2]]) %>
+</p>
+
+<p> This comp will be created with the following games : </p>
+<% if @games.count == 0 %> <p> There are no games, please create games first.</p> <% end %>
+<% @games.each do |game| %>
+    <%= game.teamA.name %>   vs    <%= game.teamB.name %>
+    <%= link_to 'Show', game %>
+    <%= link_to 'Edit', edit_game_path(game) %>
+    <%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete %>
+	</br>
+ 
+<% end %>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  
+<% end %>
