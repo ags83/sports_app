@@ -2,7 +2,7 @@ class CreateComps < ActiveRecord::Migration
   def change
     create_table :comps do |t|
       t.integer :status
-      t.datatime :closetime
+      t.datetime :closetime
 
       t.timestamps
     end
