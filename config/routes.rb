@@ -3,7 +3,7 @@ SportsApp::Application.routes.draw do
   resources :games
   resources :comps
   
-  match "/pages" => "pages#start"
+ # match "/pages" => "pages#start"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
