@@ -6,9 +6,7 @@ class PagesController < ApplicationController
 		@auth_url =  session[:oauth].url_for_oauth_code() 	
 		puts session.to_s + "<<< session"
 
-  	respond_to do |format|
-			 format.html {  }
-		 end
+  	 redirect_to @oauth.url_for_oauth_code()
 
 	end
 
