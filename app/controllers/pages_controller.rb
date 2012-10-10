@@ -2,8 +2,9 @@ require "koala"
 class PagesController < ApplicationController
 
 	def start
+		puts "IIIIIIIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNNNNNNNNNNNNNNN HHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEE "
 	  session[:oauth]= Koala::Facebook::OAuth.new(APP_ID, APP_SECRET,REDIRECT_URI)
-	  @auth_url =  session[:oauth].url_for_oauth_code(:permissions=>"read_stream") 	
+	  @auth_url =  session[:oauth].url_for_oauth_code() 	
 	  puts session.to_s + "<<< session"
 	  
 	  respond_to do |format|
@@ -27,12 +28,9 @@ class PagesController < ApplicationController
 		rescue Exception=>ex
 			puts ex.message
 		end
-
-  
  		respond_to do |format|
 		 format.html {   }			 
 		end
-
 	end
 
 	def home
