@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 
 	def start
 		session[:oauth] = Koala::Facebook::OAuth.new(APP_ID, APP_SECRET, REDIRECT_URI)
-		@auth_url =  session[:oauth].url_for_oauth_code(:permissions=>"email") 	
+		@auth_url =  session[:oauth].url_for_oauth_code() 	
 		puts session.to_s + "<<< session"
 		
   	 redirect_to session[:oauth].url_for_oauth_code()
@@ -30,7 +30,6 @@ def callback
  		respond_to do |format|
 		 format.html {   }			 
 		end
-
 	end
 end
 
