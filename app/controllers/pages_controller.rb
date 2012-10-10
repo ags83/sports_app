@@ -5,7 +5,7 @@ class PagesController < ApplicationController
 		puts "IIIIIIIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNNNNNNNNNNNNNNN HHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEE "
 
   @oauth= Koala::Facebook::OAuth.new(APP_ID, APP_SECRET,REDIRECT_URI)
-  redirect_to @oauth.url_for_oauth_code(:permissions=>"my permissions")
+  redirect_to @oauth.url_for_oauth_code()
 end
 
 def callback
