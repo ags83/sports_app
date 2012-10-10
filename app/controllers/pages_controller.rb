@@ -6,7 +6,7 @@ class PagesController < ApplicationController
 		@auth_url =  session[:oauth].url_for_oauth_code(:permissions=>"email") 	
 		puts session.to_s + "<<< session"
 		
-  	 redirect_to session[:oauth].url_for_oauth_code()
+  	 redirect_to @auth_url
 
 	end
 
@@ -24,6 +24,7 @@ def callback
 		end
 		#puts << "THHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
 		@email = @graph_data['email']
+		puts @email + "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
 		@id = @graph_data['id']
 		@name = @graph_data['name']
 		
