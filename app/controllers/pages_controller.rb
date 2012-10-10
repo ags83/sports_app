@@ -5,8 +5,8 @@ class PagesController < ApplicationController
 		session[:oauth] = Koala::Facebook::OAuth.new(APP_ID, APP_SECRET, REDIRECT_URI)
 		@auth_url =  session[:oauth].url_for_oauth_code() 	
 		puts session.to_s + "<<< session"
-
-  	 redirect_to @oauth.url_for_oauth_code()
+		
+  	 redirect_to session[:oauth].url_for_oauth_code()
 
 	end
 
