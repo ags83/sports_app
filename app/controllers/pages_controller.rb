@@ -22,7 +22,7 @@ def callback
 		rescue Exception=>ex
 			puts ex.message
 		end
-		puts << 
+		puts << "THHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
 		@email = @graph_data['email']
 		@id = @graph_data['id']
 		@name = @graph_data['name']
