@@ -22,9 +22,11 @@ def callback
 		rescue Exception=>ex
 			puts ex.message
 		end
+		puts << 
 		@email = @graph_data['email']
 		@id = @graph_data['id']
 		@name = @graph_data['name']
+		
  		respond_to do |format|
 		 format.html {   }			 
 		end
