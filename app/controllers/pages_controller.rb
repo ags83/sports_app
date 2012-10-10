@@ -15,9 +15,6 @@ def callback
   		# acknowledge code and get access token from FB
 		  session[:access_token] = session[:oauth].get_access_token(params[:code])
 		end		
-		
-		
-		
 
 		 # auth established, now do a graph call:
 
@@ -36,6 +33,3 @@ def callback
 
 	end
 end
-
-def signup
-	
