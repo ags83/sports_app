@@ -23,7 +23,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-#gem 'koala'
+gem 'koala'
 gem 'bootstrap-sass'
 
 gem 'jquery-rails'
