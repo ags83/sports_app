@@ -24,7 +24,7 @@ def callback
 		rescue Exception=>ex
 			puts ex.message
 		end
-
+		@name = @graph_data['name']
  		respond_to do |format|
 		 format.html {   }			 
 		end
