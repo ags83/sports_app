@@ -3,15 +3,20 @@ class PagesController < ApplicationController
 
 	def start
 		puts "IIIIIIIIIIIIIIIIIIIIIIIINNNNNNNNNNNNNNNNNNNNNNNNNNN HHHHHHHHHHHHHHHHHHEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRREEEEEEEEEEEEEEEE "
-	  session[:oauth]= Koala::Facebook::OAuth.new(APP_ID, APP_SECRET,REDIRECT_URI)
-	  @auth_url =  session[:oauth].url_for_oauth_code() 	
-	  puts session.to_s + "<<< session"
-	  
-	  respond_to do |format|
-			 format.html {  }
-	  end
+
+  @oauth= Koala::Facebook::OAuth.new(APP_ID, APP_SECRET,REDIRECT_URI)
+  redirect_to @oauth.url_for_oauth_code(:permissions=>"my permissions")
+end
+
+def callback
+  session[:access_token] = @oauth.get_access_token(params[:code])
+  puts "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOEEEEEEEEEEE "
+  respond_to do |format|
+		 format.html {   }			 
+		end
+end
 		 
-	  
+	'''  
 	end
 
 	def callback
@@ -36,4 +41,6 @@ class PagesController < ApplicationController
 	def home
 	  puts("boo")
 	end
+	
+	'''
 end
