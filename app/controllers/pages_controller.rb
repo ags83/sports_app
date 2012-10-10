@@ -15,7 +15,7 @@ def callback
   		# acknowledge code and get access token from FB
 		  session[:access_token] = session[:oauth].get_access_token(params[:code])
 		end		
-		@id = @graph_data['id']
+		
 		
 		
 
@@ -28,6 +28,7 @@ def callback
 			puts ex.message
 		end
 		@email = @graph_data['email']
+		@id = @graph_data['id']
 		@name = @graph_data['name']
  		respond_to do |format|
 		 format.html {   }			 
