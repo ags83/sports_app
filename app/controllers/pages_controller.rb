@@ -15,17 +15,15 @@ def callback
   		# acknowledge code and get access token from FB
 		  session[:access_token] = session[:oauth].get_access_token(params[:code])
 		end		
-
 		 # auth established, now do a graph call:
-
 		@api = Koala::Facebook::API.new(session[:access_token])
 		begin
 			@graph_data = @api.get_object("me")
 		rescue Exception=>ex
 			puts ex.message
 		end
-		#@email = @graph_data['email']
-		#@id = @graph_data['id']
+		@email = @graph_data['email']
+		@id = @graph_data['id']
 		@name = @graph_data['name']
  		respond_to do |format|
 		 format.html {   }			 
