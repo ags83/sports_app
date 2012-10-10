@@ -9,7 +9,7 @@ class PagesController < ApplicationController
 end
 
 def callback
-  session[:access_token] = @oauth.get_access_token(params[:code])
+  @sess = @oauth.get_access_token(params[:code])
   puts "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOEEEEEEEEEEE "
   respond_to do |format|
 		 format.html {   }			 
