@@ -4,6 +4,7 @@ SportsApp::Application.routes.draw do
   resources :comps
   
   match "/pages" => "pages#start"
+  match "/callback" => "pages#callback"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
