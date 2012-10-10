@@ -34,17 +34,3 @@ def callback
 	end
 end
 
-'''
-Hi Anna,
-
-Thanks for your email.
-
-I will be back on the 15th.  If you wish I can give you a call then.  I don't have much in the way of salary expectations at the moment, I am much more interested in getting into the right area and being able to improve my skills on a full time basis.  I am sure I would find the amount offered to be acceptable.
-
-My CV has most of my details, I just like to make it clear so as not to waste each others time that my background is likely fairly different from most candidates.  I am not a recent graduate with top marks and I am not certain I could currently answer many difficult 'algorithmic' type interview questions very well.  Lately I've been working on developing more 'real' world programming skills such as working with different Technologies and API's.  Though I do feel that I certainly make up for it with passion and would most definitely work harder than anyone else they would hire.
-
-Regards,
-Aaron.
-
-
-'''
