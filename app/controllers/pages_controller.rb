@@ -12,14 +12,5 @@ def callback
 end
 
 def home
-  @api = Koala::Facebook::API.new(session[:access_token])
-  begin
-    @graph_data = @api.get_object("/me/photos")
-  rescue Exception=>ex
-    puts ex.message
-  end
-
-  @graph_data do |photo|
-    puts "my photo: #{photo.name}" 
-  end
+  puts("boo")
 end
