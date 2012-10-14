@@ -1,0 +1,52 @@
+<script>
+$(document).ready(function() {
+            $('input:radio').hide().each(function() {
+                var label = $("label[for=" + '"' + this.id + '"' + "]").text();
+				
+                $('<a tip="' + $(this).attr('value') + '"  class="radio-fx tooltip ' + $(this).attr('class') + '" href="#" style="background:url(\'' + $(this).attr("imagelink") + '\') ;"><span class="radio"></span></a>').insertAfter(this);
+            });
+            
+	
+	
+    $('.radio-fx').live('click',function(e) {
+		alert('.' + $(this).attr('class') + ' checked');
+		$('.' + $(this).attr('class') + ' checked').each(function() {
+			alert('ther');
+			$(this).removeClass('checked');
+		});
+        e.preventDefault();
+		$(this).addClass('checked');
+        $check = $(this).prev('input:radio');
+        var unique = '.'+this.className.split(' ')[1]+' span';
+        $(unique).attr('class', 'radio');
+        $(this).find('span').attr('class', 'radio-checked');
+        $check.attr('checked', true);
+    });
+	
+	
+        });
+		
+</script>
+
+<%= form_tag(:controller => "tips", :action => "create", :method => "post") do %>
+
+<%= hidden_field_tag(:comp_id, @comp.id) %>
+
+<div id="tips">
+  
+  <% @games.each do |game| %>
+  <div class="game">
+  <div class="desc"> Game : <%= label_tag('game_' + game.id.to_s() + '_' + game.teamA.id.to_s(), game.teamA.name) %>  vs <%= label_tag('game_' + game.id.to_s() + '_' + game.teamB.id.to_s(), game.teamB.name) %></div>
+	<%= radio_button_tag('game[]' + game.id.to_s(), game.teamA.id, false, { :imagelink =>  game.teamA.photo.url(:thumb), :value => game.teamA.name, :class => game.id}) %>
+	<%= radio_button_tag('game[]' + game.id.to_s(), 0, false, { :imagelink =>  image_path('draw.jpg'), :value => 'Draw', :class => game.id} ) %>
+	<%= radio_button_tag( 'game[]' + game.id.to_s(), game.teamB.id, false, { :imagelink =>  game.teamB.photo.url(:thumb), :value => game.teamB.name, :class => game.id}) %>
+	
+	</div>
+	
+	<% end %>
+	<%= submit_tag("Submit Tips") %>
+
+<% end %>
+
+</div>
+

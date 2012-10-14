@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009132603) do
+ActiveRecord::Schema.define(:version => 20121012123758) do
+
+  create_table "comps", :force => true do |t|
+    t.integer  "status"
+    t.datetime "closetime"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "games", :force => true do |t|
+    t.integer  "teamA_id"
+    t.integer  "teamB_id"
+    t.integer  "comp_id"
+    t.integer  "result"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "teams", :force => true do |t|
     t.integer  "teamA"
@@ -23,6 +39,15 @@ ActiveRecord::Schema.define(:version => 20121009132603) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+  end
+
+  create_table "tips", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "user_id"
+    t.integer  "comp_id"
+    t.integer  "team_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

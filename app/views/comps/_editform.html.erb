@@ -5,8 +5,8 @@
 </p>
 
 <p> This comp will be created with the following games : </p>
-<% if @games.count == 0 %> <p> There are no games, please create games first.</p> <% end %>
-<% @games.each do |game| %>
+<% if @comp.games.count == 0 %> <p> There are no games attached to this comp</p> <% end %>
+<% @comp.games.each do |game| %>
     <%= game.teamA.name %>   vs    <%= game.teamB.name %>
     <%= link_to 'Show', game %>
     <%= link_to 'Edit', edit_game_path(game) %>

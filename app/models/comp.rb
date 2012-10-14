@@ -3,4 +3,5 @@ class Comp < ActiveRecord::Base
    attr_accessible :status, :close_time
    has_many   :games
    has_many   :tips
+   has_many	  :users
 end

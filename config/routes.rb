@@ -2,9 +2,11 @@ SportsApp::Application.routes.draw do
   resources :teams
   resources :games
   resources :comps
+  resources :tips
   
   match "/pages" => "pages#start"
   match "/callback" => "pages#callback"
+  root :to => "tips#new"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

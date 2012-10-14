@@ -5,7 +5,7 @@ class Team < ActiveRecord::Base
  has_many   :tips 
 has_attached_file :photo,
     :styles => {
-      :thumb=> "100x100#",
+      :thumb=> "80x80#",
       :small  => "150x150>" }
 	  
 validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png', 'image/gif']

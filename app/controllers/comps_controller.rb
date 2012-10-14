@@ -36,6 +36,10 @@ class CompsController < ApplicationController
   # GET /comps/1/edit
   def edit
     @comp = Comp.find(params[:id])
+	respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @comp }
+    end
   end
 
   # POST /comps

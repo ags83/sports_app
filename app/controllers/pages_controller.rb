@@ -22,11 +22,20 @@ def callback
 		rescue Exception=>ex
 			puts ex.message
 		end
-		#puts << "THHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
+		
+		
 		@email = @graph_data['email']
-		puts @email + "ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
 		@id = @graph_data['id']
 		@name = @graph_data['name']
+		#@user = User.get_by_fb_id(@id)
+		#@comp = Comp.first(:order => "id DESC", :conditions => [ "status = ?", 0 ])
+		
+		if @user.nil?
+			@user = User.new
+			@user.fb_id = @id
+			@user.email = @email
+			@user.save
+		end
 		
  		respond_to do |format|
 		 format.html {   }			 
