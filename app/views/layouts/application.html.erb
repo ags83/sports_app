@@ -6,20 +6,63 @@
     <title><%= content_for?(:title) ? yield(:title) : "Myapp" %></title>
     <meta name="description" content="">
     <meta name="author" content="">
-    <%= stylesheet_link_tag    "sports_tipping_style", :media => "all" %>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
     <%= yield(:head) %>
   </head>
   <body>
-  <header>
-  <h1> Sports Tipping App </h2>
-  </header>
-  <div id="main">
-    
+   <div class="container">
+    <header >
+	<h1> Sports Tipping </h1>
+    </header>
+	<div class="sub-header">
+	<h4> The best sports tipping comp on the internet.  Compete with your friends.  Start tipping today! </h4>
+	</div>
+    <div id="main" role="main">
+		<div class="navbar navbar-inverse">
+	   <nav class="navbar-inner">
+          <%= render 'layouts/navigation' %>
+      </nav>
+	  </div>
+	  <div class="navbar navbar-inverse">
+	   <nav class="navbar-inner">
+          
+<ul class="nav">
+  <li>
+   TESTING ONLY
+    </li>
+    <li>
+    <%= link_to("login","/login") %>
+    </li>
+	<li>
+		<%= link_to("logout","/logout") %>
+    </li>
+	<li>
+    <%= link_to("signup","/signup") %>
+    </li>
+		<li>
+    <%= link_to("teams",teams_path) %>
+    </li>
+	<li>
+    <%= link_to("games",games_path) %>
+    </li>
+	<li>
+    <%= link_to("comps",comps_path) %>
+    </li>
+	
+
+</ul>
+		  
+      </nav>
+	  </div>
+        <div class="content">
+           <div class="row">
+
               <%= render 'layouts/messages' %>
               <%= yield %>
-  </div>
+
+          </div>
           <footer>
           </footer>
         </div>

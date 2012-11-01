@@ -1,31 +1,31 @@
-<h1>Listing tips</h1>
-
-<table>
-  <tr>
-   <th>Tip ID</th>
-    <th>Tip</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% if @tips %>
-<% @tips.each do |tip| %>
-  <tr>
-	<td><%= tip.id %></td>
-	
-    <td><% if tip.team %><%= tip.team.name %><% end %></td>
-	
-    <td></td>
-    <td><%= link_to 'Show', tip %></td>
-    <td><%= link_to 'Edit', edit_tip_path(tip) %></td>
-    <td><%= link_to 'Destroy', tip, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<h2>  Your tips for this week. </h2>
+<% if @comp %>
+<%= hidden_field_tag(:comp_id, @comp.id) %>
 <% end %>
-<% end %>
-</table>
 
-<br />
+  <% @tips.each do |tip| %>
+  <div class="game-head">
+  
+	<div class="team-left">
+	<%= image_tag tip.game.teamA.photo.url(:thumb) %>
+	<div class="team-name"> <%= tip.game.teamA.name %></div>
+	</div>
+	
+	<div class="team-right">
+	<%= image_tag tip.game.teamB.photo.url(:thumb) %>
+	<div class="team-name"> <%= tip.game.teamB.name %></div>
+	</div>
 
-<%= link_to 'New tip', new_tip_path %>
+  </div>
+   <% if tip.team %>
+   <div class="game-choice show">
+  <span> Your selection : <%= tip.team.name%> </span>
+  
+  </div>
+	<% end %>
+  
+	
+	<% end %>
+	
+
+

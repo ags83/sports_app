@@ -1,19 +1,28 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <b>Result:</b>
-  <%= @game.result %>
-</p>
+<% if @comp %>
+<%= hidden_field_tag(:comp_id, @comp.id) %>
+<% end %>
 
-<p>
-  <b>TeamA:</b>
-  <%= @game.teamA.name %>
-</p>
-<p>
-  <b>TeamB:</b>
-  <%= @game.teamB.name %>
-</p>
+  <% @tips.each do |tip| %>
+  <div class="game-head">
+  
+	<div class="team-left">
+	<%= image_tag tip.game.teamA.photo.url(:thumb) %>
+	<div class="team-name"> <%= tip.game.teamA.name %></div>
+	</div>
+	
+	<div class="team-right">
+	<%= image_tag tip.game.teamB.photo.url(:thumb) %>
+	<div class="team-name"> <%= tip.game.teamB.name %></div>
+	
+	</div>
 
 
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
+  </div>
+
+  
+	
+	<% end %>
+	
+
+

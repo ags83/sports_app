@@ -1,3 +1,8 @@
 @import "bootstrap";
-body { padding-top: 60px; }
-@import "bootstrap-responsive";
+.navbar-inner { border-radius:0px; padding-left:120px;}
+ul.nav {margin-left:200px;}
+div.row {margin:0px auto; margin-bottom:20px;}
+body {   width:760px;  background:#B8CAD6; border:solid 3px #333; }
+
+
+.container { width: 700px; }

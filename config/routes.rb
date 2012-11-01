@@ -1,12 +1,30 @@
+
+
 SportsApp::Application.routes.draw do
   resources :teams
   resources :games
   resources :comps
   resources :tips
+  get "logout" => "sessions#destroy", :as => "logout"
+  get "login" => "sessions#new", :as => "login"
+  get "signup" => "users#new", :as => "signup"
+  get "competition" => "tips#mytips"
+  get "leaderboards" => "users#leaderboard"
+  get "competition" => "tips#mytips"
+  get "competition" => "tips#mytips"
+  root :to => "users#new"
+  resources :users
+  resources :sessions
+  get "secret" => "secret#index"
+  
+  
   
   match "/pages" => "pages#start"
   match "/callback" => "pages#callback"
   root :to => "tips#new"
+  
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

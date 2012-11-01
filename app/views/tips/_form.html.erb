@@ -1,50 +1,237 @@
 <script>
+
+
+
+
+(function($){
+
+	$.fn.countDown = function (options) {
+
+		config = {};
+
+		$.extend(config, options);
+
+		diffSecs = this.setCountDown(config);
+	
+		if (config.onComplete)
+		{
+			$.data($(this)[0], 'callback', config.onComplete);
+		}
+		if (config.omitWeeks)
+		{
+			$.data($(this)[0], 'omitWeeks', config.omitWeeks);
+		}
+
+		$('#' + $(this).attr('id') + ' .digit').html('<div class="top"></div><div class="bottom"></div>');
+		$(this).doCountDown($(this).attr('id'), diffSecs, 500);
+
+		return this;
+
+	};
+
+	$.fn.stopCountDown = function () {
+		clearTimeout($.data(this[0], 'timer'));
+	};
+
+	$.fn.startCountDown = function () {
+		this.doCountDown($(this).attr('id'),$.data(this[0], 'diffSecs'), 500);
+	};
+
+	$.fn.setCountDown = function (options) {
+		var targetTime = new Date();
+
+		if (options.targetDate)
+		{
+			targetTime = new Date(options.targetDate.month + '/' + options.targetDate.day + '/' + options.targetDate.year + ' ' + options.targetDate.hour + ':' + options.targetDate.min + ':' + options.targetDate.sec + (options.targetDate.utc ? ' UTC' : ''));
+		}
+		else if (options.targetOffset)
+		{
+			targetTime.setFullYear(options.targetOffset.year + targetTime.getFullYear());
+			targetTime.setMonth(options.targetOffset.month + targetTime.getMonth());
+			targetTime.setDate(options.targetOffset.day + targetTime.getDate());
+			targetTime.setHours(options.targetOffset.hour + targetTime.getHours());
+			targetTime.setMinutes(options.targetOffset.min + targetTime.getMinutes());
+			targetTime.setSeconds(options.targetOffset.sec + targetTime.getSeconds());
+		}
+
+		var nowTime = new Date();
+
+		diffSecs = Math.floor((targetTime.valueOf()-nowTime.valueOf())/1000);
+
+		$.data(this[0], 'diffSecs', diffSecs);
+
+		return diffSecs;
+	};
+
+	$.fn.doCountDown = function (id, diffSecs, duration) {
+		$this = $('#' + id);
+		if (diffSecs <= 0)
+		{
+			diffSecs = 0;
+			if ($.data($this[0], 'timer'))
+			{
+				clearTimeout($.data($this[0], 'timer'));
+			}
+		}
+
+		secs = diffSecs % 60;
+		mins = Math.floor(diffSecs/60)%60;
+		hours = Math.floor(diffSecs/60/60)%24;
+		if ($.data($this[0], 'omitWeeks') == true)
+		{
+			days = Math.floor(diffSecs/60/60/24);
+			weeks = Math.floor(diffSecs/60/60/24/7);
+		}
+		else 
+		{
+			days = Math.floor(diffSecs/60/60/24)%7;
+			weeks = Math.floor(diffSecs/60/60/24/7);
+		}
+
+		$this.dashChangeTo(id, 'seconds_dash', secs, duration ? duration : 800);
+		$this.dashChangeTo(id, 'minutes_dash', mins, duration ? duration : 1200);
+		$this.dashChangeTo(id, 'hours_dash', hours, duration ? duration : 1200);
+		$this.dashChangeTo(id, 'days_dash', days, duration ? duration : 1200);
+		$this.dashChangeTo(id, 'weeks_dash', weeks, duration ? duration : 1200);
+
+		$.data($this[0], 'diffSecs', diffSecs);
+		if (diffSecs > 0)
+		{
+			e = $this;
+			t = setTimeout(function() { e.doCountDown(id, diffSecs-1) } , 1000);
+			$.data(e[0], 'timer', t);
+		} 
+		else if (cb = $.data($this[0], 'callback')) 
+		{
+			$.data($this[0], 'callback')();
+		}
+
+	};
+
+	$.fn.dashChangeTo = function(id, dash, n, duration) {
+		  $this = $('#' + id);
+		 
+		  for (var i=($this.find('.' + dash + ' .digit').length-1); i>=0; i--)
+		  {
+				var d = n%10;
+				n = (n - d) / 10;
+				$this.digitChangeTo('#' + $this.attr('id') + ' .' + dash + ' .digit:eq('+i+')', d, duration);
+		  }
+	};
+
+	$.fn.digitChangeTo = function (digit, n, duration) {
+		if (!duration)
+		{
+			duration = 800;
+		}
+		if ($(digit + ' div.top').html() != n + '')
+		{
+
+			$(digit + ' div.top').css({'display': 'none'});
+			$(digit + ' div.top').html((n ? n : '0')).slideDown(duration);
+
+			$(digit + ' div.bottom').animate({'height': ''}, duration, function() {
+				$(digit + ' div.bottom').html($(digit + ' div.top').html());
+				$(digit + ' div.bottom').css({'display': 'block', 'height': ''});
+				$(digit + ' div.top').hide().slideUp(10);
+
+			
+			});
+		}
+	};
+
+})(jQuery);
+
+
+
+
+
+
+
 $(document).ready(function() {
             $('input:radio').hide().each(function() {
-                var label = $("label[for=" + '"' + this.id + '"' + "]").text();
-				
-                $('<a tip="' + $(this).attr('value') + '"  class="radio-fx tooltip ' + $(this).attr('class') + '" href="#" style="background:url(\'' + $(this).attr("imagelink") + '\') ;"><span class="radio"></span></a>').insertAfter(this);
-            });
-            
-	
-	
-    $('.radio-fx').live('click',function(e) {
 
-		$('.' + $(this).attr('class') + ' checked').each(function() {
-			alert('ther');
+			if (this.checked) {
+				$('<a class="custom-radio checked" name="' + this.name + '" href="#"></a>').insertAfter(this);
+			} else {
+				$('<a class="custom-radio" name="' + this.name + '" href="#"></a>').insertAfter(this);
+			}
+                });
+
+    $('.custom-radio').live('click',function(e) {
+		$('input[name="' + this.name +'"]').each(function() {
+			$(this).removeClass('checked');
+			$(this).removeAttr('checked');
+		});
+		$('a[name="' + this.name + '"]').each(function() {
 			$(this).removeClass('checked');
 		});
         e.preventDefault();
 		$(this).addClass('checked');
         $check = $(this).prev('input:radio');
-        var unique = '.'+this.className.split(' ')[1]+' span';
-        $(unique).attr('class', 'radio');
-        $(this).find('span').attr('class', 'radio-checked');
         $check.attr('checked', true);
     });
 	
-	
+
         });
 		
+		
+		
+		
+		
+
 </script>
 
 <%= form_tag(:controller => "tips", :action => "create", :method => "post") do %>
-
+<% if @comp %>
 <%= hidden_field_tag(:comp_id, @comp.id) %>
-
-<div id="tips">
-  
+<% end %>
   <% @games.each do |game| %>
-  <div class="game">
-  <div class="desc"> Game : <%= label_tag('game_' + game.id.to_s() + '_' + game.teamA.id.to_s(), game.teamA.name) %>  vs <%= label_tag('game_' + game.id.to_s() + '_' + game.teamB.id.to_s(), game.teamB.name) %></div>
-	<%= radio_button_tag('game[]' + game.id.to_s(), game.teamA.id, false, { :imagelink =>  game.teamA.photo.url(:thumb), :value => game.teamA.name, :class => game.id}) %>
-	<%= radio_button_tag('game[]' + game.id.to_s(), 0, false, { :imagelink =>  image_path('draw.jpg'), :value => 'Draw', :class => game.id} ) %>
-	<%= radio_button_tag( 'game[]' + game.id.to_s(), game.teamB.id, false, { :imagelink =>  game.teamB.photo.url(:thumb), :value => game.teamB.name, :class => game.id}) %>
-	
+  <div class="game-head">
+  
+	<div class="team-left">
+	<%= image_tag game.teamA.photo.url(:thumb) %>
+	<div class="team-name"> <%= game.teamA.name %></div>
 	</div>
 	
+	<div class="team-right">
+	<%= image_tag game.teamB.photo.url(:thumb) %>
+	<div class="team-name"> <%= game.teamB.name %></div>
+	
+	</div>
+
+
+  </div>
+  <div class="game-choice">
+
+ <div class="choice left">
+	<%= radio_button_tag('game[]' + game.id.to_s(), game.teamA.id, false) %>
+	<span> 1 - For the win </span>
+	</div>
+
+	<div class="choice mid">
+	<%= radio_button_tag('game[]' + game.id.to_s(), 0, true ) %>
+	<span> X - For a draw </span>
+	</div>
+
+	<div class="choice right">
+	<%= radio_button_tag( 'game[]' + game.id.to_s(), game.teamB.id, false ) %>
+	<span> 2 - For the win </span>
+	</div>
+  
+  
+  </div>
+  
+	
 	<% end %>
-	<%= submit_tag("Submit Tips") %>
+	
+	<%= submit_tag("Submit Tips", { :class => 'button' }) %>
+ 
+</div>
+
+
+
+	
 
 <% end %>
 

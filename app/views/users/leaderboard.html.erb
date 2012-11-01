@@ -1,0 +1,24 @@
+
+<h2> Last weeks top pickers </h2>
+
+<% @compscores.each do |compscore| %>
+  
+	<div class="compscore"> 
+	<%= compscore.score %> </br>
+	
+	<% end %>
+	
+	
+  <% @users.each do |user| %>
+  
+	<div class="user"> 
+	<%= user.email %> </br>
+	<%= user.score %> </br>
+	
+	<% end %>
+	
+
+
+
+
+<%= link_to 'Back', games_path %>

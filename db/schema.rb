@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121012123758) do
+ActiveRecord::Schema.define(:version => 20121021044833) do
 
   create_table "comps", :force => true do |t|
     t.integer  "status"
@@ -48,6 +48,24 @@ ActiveRecord::Schema.define(:version => 20121012123758) do
     t.integer  "team_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_comps", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "comp_id"
+    t.integer  "score"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.integer  "fb_id"
+    t.string   "email"
+    t.string   "password_digest"
+    t.integer  "comp_id"
+    t.integer  "score"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
 end

@@ -1,15 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  fb_id: 1
-  email: MyString
-  password_digest: MyString
+  user_id: 1
   comp_id: 1
   score: 1
 
 two:
-  fb_id: 1
-  email: MyString
-  password_digest: MyString
+  user_id: 1
   comp_id: 1
   score: 1

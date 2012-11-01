@@ -1,8 +1,21 @@
-<%= form_for(@comp) do |f| %>
+<%= nested_form_for @comp do |f| %>
   <p>
   Comp status:
   <%= select( :comp, :status,   [['Open', 0], ['Closed', 1],['Complete', 2]]) %>
-</p>
+  </br>
+  Comp close date-time:
+  <%= select_datetime %>
+  </p>
+
+
+
+
+<%= f.fields_for :games do |games_form| %>
+  <%= games_form.text_field :id %>
+  <%= games_form.link_to_remove "Remove this game" %>
+<% end %>
+<p><%= f.link_to_add "Add a game", :games %></p>
+
 
 <p> This comp will be created with the following games : </p>
 <% if @games.count == 0 %> <p> There are no games, please create games first.</p> <% end %>

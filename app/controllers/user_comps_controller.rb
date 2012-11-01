@@ -1,0 +1,2 @@
+class UserCompsController < ApplicationController
+end
