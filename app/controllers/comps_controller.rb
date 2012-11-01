@@ -51,7 +51,7 @@ class CompsController < ApplicationController
   
     @comp = Comp.new(params[:comp])
 	@games = Game.find_all_by_comp_id(nil)
-	Comp.find_each(:status = 0)
+
     respond_to do |format|
       if @comp.save
 		@games.each do |game|
